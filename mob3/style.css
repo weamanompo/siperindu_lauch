@@ -1,0 +1,125 @@
+* {
+
+    margin: 0;
+    padding: 0;
+}
+
+body {
+
+    font-family: sans-serif;
+    width: 100% ;
+
+}
+
+nav {
+
+display: flex;
+background-color: rgb(50, 48, 50);
+justify-content: space-around;
+padding : 10px 0 ;
+color: blanchedalmond;
+width: 100% ;
+
+}
+
+nav ul {
+
+display: flex;
+list-style: none;
+width: 40%;
+justify-content: space-between;
+
+
+}
+nav ul li a {
+
+color: blanchedalmond;
+text-decoration: none;
+
+}
+
+.peta {
+    width: 100%;
+    padding : 1px 1px;
+}
+
+
+ .filter {
+display : flex;
+position: fixed;
+background-color: rgba(0, 0, 0, 0.6);
+z-index: -999;
+left: 0;
+top: 0;
+width: 50%;
+height: 50%;
+display: none;
+
+
+ } 
+
+ .filter .nav {
+
+    width: 50%;
+    height:20%;
+    margin: auto;
+    background-color: rgb(255, 255, 255);
+    padding : 20px;
+    display: none;
+
+ }
+
+ .filter .nav select {
+
+    margin: auto;
+
+width: 100%;
+
+ }
+
+ .legenda {
+    display : flex;
+    position: fixed;
+    /* background-color: rgba(0, 0, 0, 0.6); */
+    z-index: -99;
+    left: 0;
+    top: 0;
+    width: 50%;
+    height: 50%;
+
+        
+     } 
+
+     .legenda .isi_legenda {
+
+        width: 50%;
+        height:50%;
+        margin: auto;
+        background-color: rgb(255, 255, 255);
+        padding : 0px 2px;
+        border: solid salmon;
+        display: none;
+    
+     }
+
+     #container { display:block; }
+@media only screen and (orientation:portrait){
+#container {
+/* height: 100vw; */
+-webkit-transform: rotate(90deg);
+-moz-transform: rotate(90deg);
+-o-transform: rotate(90deg);
+-ms-transform: rotate(90deg);
+transform: rotate(90deg);
+}
+}
+@media only screen and (orientation:landscape){
+#container {
+-webkit-transform: rotate(0deg);
+-moz-transform: rotate(0deg);
+-o-transform: rotate(0deg);
+-ms-transform: rotate(0deg);
+transform: rotate(0deg);
+}
+}
+

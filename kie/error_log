@@ -1,0 +1,5 @@
+[18-Sep-2023 10:07:17 Asia/Jakarta] PHP Warning:  mysqli_connect(): (08004/1040): Too many connections in /home1/etanaonl/siperindu.online/koneksi.php on line 3
+[18-Sep-2023 10:07:17 Asia/Jakarta] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, boolean given in /home1/etanaonl/siperindu.online/kie/index.php on line 52
+[18-Sep-2023 10:07:17 Asia/Jakarta] PHP Warning:  mysqli_num_rows() expects parameter 1 to be mysqli_result, null given in /home1/etanaonl/siperindu.online/kie/index.php on line 54
+[18-Sep-2023 10:07:17 Asia/Jakarta] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, boolean given in /home1/etanaonl/siperindu.online/kie/index.php on line 157
+[18-Sep-2023 10:07:17 Asia/Jakarta] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home1/etanaonl/siperindu.online/kie/index.php on line 158
