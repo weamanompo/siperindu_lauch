@@ -36,7 +36,7 @@ $aga = mysqli_query($koneksi, "SELECT * FROM api ORDER BY id desc");
     <hr>
     <div class="card" style="width: 18rem;" id="content">
             <div class="card-body">
-                <h5 class="card-title">
+            <h5 class="card-title">Data Hasil Input</h5>
                 <div class="mb-3">
                 <table class="table">
         <thead>
