@@ -56,7 +56,7 @@ $jml = mysqli_query($koneksi, "SELECT * FROM agenda WHERE tanggal >= '$tglref' "
                         <a class="nav-link scrollto active" href="https://www.instagram.com/siperindu.bkkbn/?hl=id"><i class="ri-instagram-line"></i></a>
                     </li>
                     <li>
-                        <a class="nav-link scrollto active" href="2023/pb/login" target="_blank"><i class="ri-login-box-line"></i></a>
+                        <a class="nav-link scrollto active" href="https://siperindu.online/2023/pb/login" target="_blank"><i class="ri-login-box-line"></i></a>
                     </li>
                 </ul>
             </nav>
@@ -94,10 +94,10 @@ $jml = mysqli_query($koneksi, "SELECT * FROM agenda WHERE tanggal >= '$tglref' "
                 <div class="icon-box"><a href="orientasi">
               <i class="ri-award-fill"></i>
               <?php if($jmlh != 0) : ?>
-              <h3>Fasilitasi <span class="badge bg-danger"><?= $jmlh ; ?> New</span></h3>
+              <h3>Agenda Fasilitasi <span class="badge bg-danger"><?= $jmlh ; ?> New</span></h3>
 <?php endif ; ?>
 <?php if($jmlh == 0) : ?>
-              <h3>Fasilitasi</h3>
+              <h3>Agenda Fasilitasi</h3>
 <?php endif ; ?>
             </a>
           </div>

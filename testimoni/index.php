@@ -57,10 +57,10 @@ $tglref = date('Y-m-d');
           <li><a class="nav-link scrollto" href="../profil">Profil</a></li>
           <li><a class="nav-link scrollto" href="../dashboard">Dashboard</a></li>
           <?php if ($jmlh != 0) : ?>
-            <li><a class="nav-link scrollto " href="../orientasi">Fasilitasi&nbsp;<span class="badge bg-danger"><?= $jmlh; ?> New</span></a></li>
+            <li><a class="nav-link scrollto " href="../orientasi">Agenda Fasilitasi&nbsp;<span class="badge bg-danger"><?= $jmlh; ?> New</span></a></li>
           <?php endif; ?>
           <?php if ($jmlh == 0) : ?>
-            <li><a class="nav-link scrollto " href="../orientasi">Fasilitasi&nbsp;</a></li>
+            <li><a class="nav-link scrollto " href="../orientasi">Agenda Fasilitasi&nbsp;</a></li>
           <?php endif; ?>
           <li><a class="nav-link scrollto" href="../data">Tabel Dinamis</a></li>
           <li><a class="nav-link scrollto" href="../piramida">Piramida Penduduk</a></li>
