@@ -3,9 +3,9 @@ include 'koneksi.php';
 
 $tglref = date('Y-m-d');
 
-$jml = mysqli_query($koneksi, "SELECT * FROM agenda WHERE tanggal >= '$tglref' ")  ;
-      
-      $jmlh = mysqli_num_rows($jml);   
+$jml = mysqli_query($koneksi, "SELECT * FROM agenda WHERE tanggal >= '$tglref' ");
+
+$jmlh = mysqli_num_rows($jml);
 
 ?>
 
@@ -77,30 +77,30 @@ $jml = mysqli_query($koneksi, "SELECT * FROM agenda WHERE tanggal >= '$tglref' "
             </div>
             <div class="menu2 row" data-aos="zoom-in" data-aos-delay="250">
                 <div class="col-xl-2 col-md-4">
-                <div class="icon-box"><a href="profil">
-              <i class="ri-folder-user-line"></i>
-              <h3>Profil</h3>
-            </a>
-          </div>
+                    <div class="icon-box"><a href="profil">
+                            <i class="ri-folder-user-line"></i>
+                            <h3>Profil</h3>
+                        </a>
+                    </div>
                 </div>
                 <div class="col-xl-2 col-md-4">
-                <div class="icon-box"><a href="dashboard">
-              <i class="ri-dashboard-3-line"></i>
-              <h3>Dashboard</h3>
-            </a>
-          </div>
+                    <div class="icon-box"><a href="dashboard">
+                            <i class="ri-dashboard-3-line"></i>
+                            <h3>Dashboard</h3>
+                        </a>
+                    </div>
                 </div>
                 <div class="col-xl-2 col-md-4">
-                <div class="icon-box"><a href="orientasi">
-              <i class="ri-award-fill"></i>
-              <?php if($jmlh != 0) : ?>
-              <h3>Agenda Fasilitasi <span class="badge bg-danger"><?= $jmlh ; ?> New</span></h3>
-<?php endif ; ?>
-<?php if($jmlh == 0) : ?>
-              <h3>Agenda Fasilitasi</h3>
-<?php endif ; ?>
-            </a>
-          </div>
+                    <div class="icon-box"><a href="orientasi">
+                            <i class="ri-award-fill"></i>
+                            <?php if ($jmlh != 0) : ?>
+                                <h3>Agenda Fasilitasi <span class="badge bg-danger"><?= $jmlh; ?> New</span></h3>
+                            <?php endif; ?>
+                            <?php if ($jmlh == 0) : ?>
+                                <h3>Agenda Fasilitasi</h3>
+                            <?php endif; ?>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
