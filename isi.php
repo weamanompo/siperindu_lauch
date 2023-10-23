@@ -23,7 +23,7 @@ document.location.href = 'aga.php';
 </script>";
 }else {
 
-    echo "<script>alert('Proses Penambahan data Gagal');
+    echo "<script>alert('Proses Penambahan data Gagal !');
 document.location.href = 'aga.php';
 </script>";
 }
