@@ -1,15 +1,12 @@
 <?php
 
-// $data1 = file_get_contents('http://localhost/api_rindu/mahasiswa2');
-$data1 = file_get_contents('http://siperindu.online/api_rindu/mahasiswa2');
+include '../koneksi.php';
 
-$menu2 = json_decode($data1, true);
-
-$data1 = $menu2['data'];
-
-$jlmh2 = $menu2['data'][0]['jmlh'];
+date_default_timezone_set('Asia/Makassar');
 
 $tglref = date('Y-m-d');
+
+
 
 function tgl_indo($tanggal)
 {
@@ -85,19 +82,21 @@ function tgl_indo($tanggal)
 
 
       <nav id="navbar" class="navbar order-last order-lg-0">
-        
+        <?php $jml = mysqli_query($koneksi, "SELECT * FROM agenda WHERE tanggal >= '$tglref' ");
+
+        $jmlh = mysqli_num_rows($jml);
+
+        ?>
         <ul>
           <li><a class="nav-link scrollto " href="../index.php">Home</a></li>
           <li><a class="nav-link scrollto" href="../profil">Profil</a></li>
           <li><a class="nav-link scrollto" href="../dashboard">Dashboard</a></li>
-          
-          <?php if ($jlmh2 != 0) : ?>
-            <li><a class="nav-link scrollto " href="#fasilitasi">Fasilitasi&nbsp;<span class="badge bg-danger"><?= $jlmh2; ?> New</span></a></li>
+          <?php if ($jmlh != 0) : ?>
+            <li><a class="nav-link scrollto " href="#fasilitasi">Agenda Fasilitasi&nbsp;<span class="badge bg-danger"><?= $jmlh; ?> New</span></a></li>
           <?php endif; ?>
-          <?php if ($jlmh2 == 0) : ?>
-            <li><a class="nav-link scrollto " href="#fasilitasi">Fasilitasi&nbsp;</a></li>
+          <?php if ($jmlh == 0) : ?>
+            <li><a class="nav-link scrollto " href="#fasilitasi">Agenda Fasilitasi&nbsp;</a></li>
           <?php endif; ?>
-
 
           <li><a class="nav-link scrollto" href="../data">Tabel Dinamis</a></li>
           <li><a class="nav-link scrollto" href="../piramida">Piramida Penduduk</a></li>
@@ -141,14 +140,76 @@ function tgl_indo($tanggal)
 
           <!-- batas -->
 
-          <?php $no = 0 ; ?>
+          <?php $ori = mysqli_query($koneksi, "SELECT * FROM agenda WHERE tanggal >= '$tglref' ORDER BY tanggal ASC "); ?>
 
-          <?php  foreach($data1 as $ret)   : ?>
-            <?php $tgl1 = $ret['tanggal'] ; 
-                    
-                    $tgl = tgl_indo("$tgl1");
 
-                    $day = date('D', strtotime($tgl1));
+
+          <?php while ($d = mysqli_fetch_assoc($ori)) : ?>
+            <?php $kda = $d['kode_agenda']; ?>
+
+            <?php
+
+            $kdins = $d['kode_instansi'];
+
+            $prov = substr($kdins, 0, 2);
+
+            $kodeprov = substr($kdins, 2, 2);
+
+            $kode = strlen($kdins);
+
+            if ($kode == 2 && $kdins == 01) {
+
+              $asengins = "BKKBN PUSAT";
+              $apa = "";
+              $final = "{$asengins}{$apa}";
+            }
+            if ($kode == 4 && $prov == 02) {
+
+              $asengins = "Perwakilan BKKBN Provinsi ";
+
+              $qprov = mysqli_query($koneksi, "SELECT * FROM wilayah_2022 WHERE kode = '$kodeprov' ");
+
+              $aprov = mysqli_fetch_assoc($qprov);
+
+              $apa = $aprov['nama'];
+
+              $final = "{$asengins}{$apa}";
+            }
+            if ($kode == 4 && $prov == 03) {
+
+              $asengins = "OPD DALDUK Provinsi ";
+
+              $qprov = mysqli_query($koneksi, "SELECT * FROM wilayah_2022 WHERE kode = '$kodeprov' ");
+
+              $aprov = mysqli_fetch_assoc($qprov);
+
+              $apa = $aprov['nama'];
+
+              $final = "{$asengins}{$apa}";
+            }
+            if ($kode == 7) {
+
+              $asengins = "OPD DALDUK ";
+
+              $prov = substr($kdins, 2, 5);
+
+              $qprov = mysqli_query($koneksi, "SELECT * FROM wilayah_2022 WHERE kode = '$prov' ");
+
+              $aprov = mysqli_fetch_assoc($qprov);
+
+              $apa = $aprov['nama'];
+
+              $final = "{$asengins}{$apa}";
+            }
+
+            $tanggal = $d['tanggal'];
+            $jam =  $d['jam'];
+            $jam_selesai =  $d['jam_selesai'];
+            $wib =  strtoupper($d['wib']);
+
+            $tgl = tgl_indo("$tanggal");
+
+            $day = date('D', strtotime($tanggal));
             $dayList = array(
               'Sun' => 'Minggu',
               'Mon' => 'Senin',
@@ -158,26 +219,27 @@ function tgl_indo($tanggal)
               'Fri' => 'Jumat',
               'Sat' => 'Sabtu'
             );
-                    
-                    ?>
-            <?php if($tgl1 >=  $tglref )   : ?>
 
-                <?php $no++; ?>
-                
-                <div class="col-lg-12 pt-4 pt-lg-0 order-2 order-lg-1 content" data-aos="fade-right" data-aos-delay="100">
-              <h5 style="color :chocolate;">NAMA KEGIATAN : <span style="color:darkslategray;"><?= $ret['kegiatan'] ; ?></span></h5>
+            ?>
+
+            <?php $jum = mysqli_query($koneksi, "SELECT * FROM agenda JOIN trans_orientasi ON agenda.kode_agenda = trans_orientasi.agenda_kode WHERE agenda.kode_agenda = '$kda' ");
+            $tebbe = mysqli_num_rows($jum);
+            ?>
+
+            <div class="col-lg-12 pt-4 pt-lg-0 order-2 order-lg-1 content" data-aos="fade-right" data-aos-delay="100">
+              <h5 style="color :chocolate;">NAMA KEGIATAN : <span style="color:darkslategray;"><?= strtoupper($d['judul_agenda']); ?></span></h5>
               <ul>
                 <li><i class="ri-check-double-line"></i><strong>Penyelenggara :</strong>
-                  <span> <?= $ret['instansi'] ; ?></span>
+                  <span> <?= $final; ?></span>
                 </li>
                 <li><i class="ri-check-double-line"></i> <strong>Hari :</strong>&nbsp;<span><?= $dayList[$day]; ?></span>,&nbsp;<span><?= $tgl; ?></span></li>
-                <li><i class="ri-check-double-line"></i> <strong>Jam :</strong>&nbsp;<span></span><?= $ret['mulai'] ; ?></span>&nbsp; s/d &nbsp;<span><?= $ret['selesai'] ; ?></span>&nbsp;<span><?= $ret['wib'] ; ?></span></li>
-                <li><i class="ri-check-double-line"></i> <strong>Tempat :</strong> <span><?= $ret['tempat'] ; ?></span></li>
-                <li><i class="ri-check-double-line"></i> <strong>Jumlah pendaftar sampai saat ini :</strong> <span><?= $ret['tebbe'] ; ?></span><br><br><a style="color:darkred;" href="<?= $ret['linkna'] ; ?>" target="_blank"><strong>AYO DAFTAR</strong></a></li>
+                <li><i class="ri-check-double-line"></i> <strong>Jam :</strong>&nbsp;<span></span><?= $jam; ?></span>&nbsp; s/d &nbsp;<span><?= $jam_selesai; ?></span>&nbsp;<span><?= $wib; ?></span></li>
+                <li><i class="ri-check-double-line"></i> <strong>Tempat :</strong> <span><?= $d['tempat']; ?></span></li>
+                <li><i class="ri-check-double-line"></i> <strong>Jumlah pendaftar sampai saat ini :</strong> <span><?= $tebbe; ?></span><br><br><a style="color:darkred;" href="<?= $d['link']; ?>" target="_blank"><strong>AYO DAFTAR</strong></a></li>
+
               </ul>
             </div>
-            <?php endif ; ?>
-            <?php endforeach ; ?>
+          <?php endwhile; ?>
           <!-- batas -->
         </div>
 

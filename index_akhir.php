@@ -1,11 +1,13 @@
 <?php
-$data1 = file_get_contents('http://siperindu.online/api_rindu/mahasiswa2');
+include 'koneksi.php';
 
-$menu2 = json_decode($data1, true);
+$tglref = date('Y-m-d');
 
-$data1 = $menu2['data'];
+$jml = mysqli_query($koneksi, "SELECT * FROM agenda WHERE tanggal >= '$tglref' ");
 
-$jlmh2 = $menu2['data'][0]['jmlh'];
+$jmlh = mysqli_num_rows($jml);
+
+
 
 ?>
 
@@ -93,10 +95,10 @@ $jlmh2 = $menu2['data'][0]['jmlh'];
                 <div class="col-xl-2 col-md-4">
                     <div class="icon-box"><a href="orientasi">
                             <i class="ri-award-fill"></i>
-                            <?php if ($jlmh2 != 0) : ?>
-                                <h3>Agenda Fasilitasi <span class="badge bg-danger"><?= $jlmh2; ?> New</span></h3>
+                            <?php if ($jmlh != 0) : ?>
+                                <h3>Agenda Fasilitasi <span class="badge bg-danger"><?= $jmlh; ?> New</span></h3>
                             <?php endif; ?>
-                            <?php if ($jlmh2 == 0) : ?>
+                            <?php if ($jmlh == 0) : ?>
                                 <h3>Agenda Fasilitasi</h3>
                             <?php endif; ?>
                         </a>
